@@ -14,17 +14,17 @@
 </template>
 
 <script>
-import UserItem from '../users/UserItem.vue';
+import UserItem from "../users/UserItem.vue";
 
 export default {
-  inject: ['users', 'teams'],
-  props:['teamId'],
+  inject: ["users", "teams"],
+  props: ["teamId"],
   components: {
     UserItem,
   },
   data() {
     return {
-      teamName: '',
+      teamName: "",
       members: [],
     };
   },
@@ -48,6 +48,12 @@ export default {
   created() {
     this.loadTeamMembers(this.teamId);
     console.log(this.$route.query);
+  },
+  beforeRouteUpdate(to, from, next) {
+    // this.loadTeamMembers(to.params.teamId);
+    console.log("TeamMembers beforeRouteUpdate");
+    console.log(to, from);
+    next();
   },
   watch: {
     teamId(newId) {
